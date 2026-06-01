@@ -1,0 +1,7 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Force light theme even in dark mode -->
+    <style name="Base.Theme.MyApplication" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowBackground">@color/light_blue_background</item>
+        <item name="colorPrimary">#1A73E8</item>
+    </style>
+</resources>
