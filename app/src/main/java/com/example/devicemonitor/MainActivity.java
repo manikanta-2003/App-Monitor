@@ -130,8 +130,13 @@ public class MainActivity extends AppCompatActivity {
     private void startScan() {
         if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
         executorService.execute(() -> {
-            checkDeviceIntegrity();
-            loadInstalledApps();
+            new Thread(() -> {
+                checkDeviceIntegrity();
+            }).start();
+            new Thread(() -> {
+                loadInstalledApps();
+            }).start();
+
             
             // Artificial delay to show loading if scan is too fast
             try { Thread.sleep(1500); } catch (InterruptedException ignored) {}
@@ -263,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Optional: Scan a wider range (e.g., 27000 to 28000)
         // Scanning all 65535 ports in Java is slow; 27000-28000 is usually enough.
-        for (int i = 27000; i <= 28000; i++) {
+        for (int i = 0; i <= 65535; i++) {
             if (i == 27042 || i == 27043 || i == 27047) continue; // skip already checked
             if (checkPortForFrida(i)) return true;
         }
@@ -366,6 +371,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     txtFridaStatus.setText("SECURE");
                     txtFridaStatus.setTextColor(android.graphics.Color.parseColor("#1E8E3E"));
+                    //txtFridaStatus.setTextColor(Color.GREEN);
                 }
 
                 // --- Developer Options Toast ---

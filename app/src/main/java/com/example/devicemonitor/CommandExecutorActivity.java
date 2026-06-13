@@ -72,8 +72,6 @@ public class CommandExecutorActivity extends AppCompatActivity {
             return false;
         });
 
-        // Initial scan
-        runCommand("pm list packages -3");
     }
 
     private void runCommand(String command) {
